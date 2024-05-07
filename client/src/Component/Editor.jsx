@@ -6,6 +6,32 @@ import styled from "@emotion/styled";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 
+const fontFamilyArr = [
+  "Roboto Condensed",
+  "Times New Roman",
+  "Calibri",
+  "Calibri Light",
+  "Sans-Serif",
+  "Arial",
+  "Helvetica",
+  "Courier New",
+  "Georgia",
+  "Verdana",
+  "Tahoma",
+  "Geneva",
+  "Impact",
+  "Lucida Console",
+];
+
+let fonts = Quill.import("attributors/style/font");
+fonts.whitelist = fontFamilyArr;
+Quill.register(fonts, true);
+
+const fontSizeArr = ["10px", "11px", "12px", "14px", "18px", "24px"];
+var Size = Quill.import("attributors/style/size");
+Size.whitelist = fontSizeArr;
+Quill.register(Size, true);
+
 const Component = styled.div`
   background: #f5f5f5;
 `;
@@ -13,15 +39,15 @@ const Component = styled.div`
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
   ["blockquote", "code-block"],
-  [{ header: 1 }, { header: 2 }],
+  [{ size: fontSizeArr }],
   [{ list: "ordered" }, { list: "bullet" }],
   [{ script: "sub" }, { script: "super" }],
   [{ indent: "-1" }, { indent: "+1" }],
   [{ direction: "rtl" }],
-  [{ size: ["small", false, "large", "huge"] }],
+  //[{ size: ["small", false, "large", "huge"] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ color: [] }, { background: [] }],
-  [{ font: [] }],
+  [{ font: fontFamilyArr }],
   [{ align: [] }],
   ["clean"],
 ];
